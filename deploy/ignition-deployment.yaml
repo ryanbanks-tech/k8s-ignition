@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ignition
+  namespace: ignition
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ignition
+  template:
+    metadata:
+      labels:
+        app: ignition
+    spec:
+      containers:
+      - name: ignition
+        image: inductiveautomation/ignition:8.1.43
+        env:
+        - name: "ACCEPT_IGNITION_EULA"
+          value: "Y"
+        - name: TZ
+          value: "America/Chicago" # Set your timezone
+        - name: "GATEWAY_ADMIN_USERNAME"
+          value: "banks" # Set your admin username
+        - name: "GATEWAY_ADMIN_PASSWORD"
+          value: "b@nk$g@t3w@y" # Set your admin password
+        - name: "IGNITION_EDITION"
+          value: "maker" # Set your edition
+        ports:
+        - containerPort: 80
+        - containerPort: 8088
+        - containerPort: 443
+        resources:
+          requests:
+            memory: "2048Mi"  # 2GB memory for requests
+            cpu: "1000m"      # 1 CPU core for requests
+          limits:
+            memory: "4096Mi"  # 4GB memory for limits
+            cpu: "2000m"      # 2 CPU cores for limits
