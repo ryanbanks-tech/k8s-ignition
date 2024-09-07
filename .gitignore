@@ -1,2 +1,6 @@
 # Mac files
 .DS_Store
+
+# Busybox Debug Yaml
+debug.yaml
+
