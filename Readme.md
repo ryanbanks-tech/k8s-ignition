@@ -11,7 +11,7 @@ An Ignition Kubernetes deployment
 
 # Deployment
 ## Makefile
-* A Makefile is including if you're able to run the make command. It will build the Go script.
+* A Makefile is including if you're able to run the make command. It will build the Go script as well as deploy the K8S manifest.
     * The Go script only removes passwords from plain text in yaml files.
 ## Manifest Files
 * Deployment file
@@ -20,6 +20,7 @@ An Ignition Kubernetes deployment
     * This file contains the ip address for your load balancer.
 * Namespace file
 ## Kubernetes
+* Run "make deploy-k8s" to deploy the namespace, service, and deployment in that order
 * From the project's root directory, you should be able to run "kubectl apply -f deploy"
 * Apply individual manifest files by changing directory into deploy and running "kubectl apply -f file.yaml"
 
