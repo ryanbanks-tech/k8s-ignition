@@ -11,7 +11,7 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	// Regular expression to match common sensitive keys
-	keyRe := regexp.MustCompile(`(?i)(password|secret|pw|apikey|token|key|passphrase):\s*["']?(.+)["']?`)
+	keyRe := regexp.MustCompile(`(?i)(password|secret|pw|apikey|token|key|passphrase|GATEWAY_ADMIN_PASSWORD):\s*["']?(.+)["']?`)
 
 	// Regular expression to match potential password values
 	valueRe := regexp.MustCompile(`[a-zA-Z0-9@#$%^&*!]+`)

@@ -9,6 +9,3 @@ An Ignition Kubernetes deployment
 * Load Balancing with MetalLB by enabling it on microk8s
 * CoreDNS must also be enabled on microk8s
 
-[filter "secrets"]
-    clean = ./filter-secrets
-    smudge = cat
