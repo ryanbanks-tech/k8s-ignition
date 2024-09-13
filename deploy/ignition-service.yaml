@@ -20,4 +20,4 @@ spec:
     targetPort: 443
     name: https
   type: LoadBalancer
-  loadBalancerIP: 10.20.150.251 # Set your load balancer IP
+  loadBalancerIP: 10.20.160.251 # Set your load balancer IP
