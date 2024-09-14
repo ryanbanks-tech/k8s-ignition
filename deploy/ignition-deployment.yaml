@@ -13,6 +13,7 @@ spec:
       labels:
         app: ignition
     spec:
+      dnsPolicy: ClusterFirst
       containers:
       - name: ignition
         image: inductiveautomation/ignition:8.1.43
