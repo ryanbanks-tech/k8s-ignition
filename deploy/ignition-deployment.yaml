@@ -39,3 +39,10 @@ spec:
           limits:
             memory: "4096Mi"  # 4GB memory for limits
             cpu: "2000m"      # 2 CPU cores for limits
+        volumeMounts:
+        - name: ignition-data
+          mountPath: /var/lib/ignition # Mount the persistent volume at this path
+      volumes:
+      - name: ignition-data
+        persistentVolumeClaim:
+          claimName: ignition-pvc            
