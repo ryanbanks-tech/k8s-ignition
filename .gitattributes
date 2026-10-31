@@ -1,1 +1,3 @@
 *.yaml filter=secrets
+# Helm values hold no secrets; the filter would mangle secret names and "microk8s"
+helm/*.yaml -filter

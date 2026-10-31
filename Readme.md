@@ -9,7 +9,16 @@ An Ignition Kubernetes deployment
 * Load Balancing with MetalLB by enabling it on microk8s
 * CoreDNS must also be enabled on microk8s
 
-# Deployment
+# Deployment (Helm)
+The gateway is deployed with the official Inductive Automation chart ([charts.ia.io](https://charts.ia.io)), chart 0.2.5 / Ignition 8.3.10.
+* Values live in `helm/values.yaml`: Maker edition, MetalLB IP 10.20.160.251, 10Gi volume on `microk8s-hostpath`.
+* The admin password is stored in the `ignition-gateway-admin` Secret, not in git.
+* First-time cutover from the old manifests: run `microk8s enable hostpath-storage` on a node, then `./helm/cutover.sh`.
+* Upgrades: `helm upgrade ignition inductiveautomation/ignition --version <ver> -n ignition -f helm/values.yaml`
+* The gateway is at http://10.20.160.251:8088 (https on 8043).
+
+# Legacy Deployment (raw manifests, Ignition 8.1)
+The `deploy/` manifests are kept for rollback only. Their PVC is mounted at `/var/lib/ignition`, but the 8.1 image keeps its data in `/usr/local/bin/ignition/data`, so the gateway lost its config every time the container restarted.
 ## Makefile
 * A Makefile is including if you're able to run the make command. It will build the Go script as well as deploy the K8S manifest.
     * The Go script only removes passwords from plain text in yaml files.

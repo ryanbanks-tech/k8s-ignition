@@ -1,0 +1,45 @@
+# Values for the official Inductive Automation Ignition Helm chart
+# Chart: inductiveautomation/ignition 0.2.5 (Ignition 8.3.10)
+# https://charts.ia.io
+
+image:
+  tag: "8.3.10"
+
+commissioning:
+  edition: maker
+  acceptIgnitionEULA: true
+  disableQuickstart: true
+  auth:
+    adminUsername: banks
+    # Created out-of-band so the password never lives in git (see Readme)
+    existingSecret: ignition-gateway-admin
+    adminPasswordKey: gateway-admin-password
+
+gateway:
+  replicas: 1
+  maxRAMPercentage: 75
+  resources:
+    requests:
+      memory: "2048Mi"
+      cpu: "1000m"
+    limits:
+      memory: "4096Mi"
+      cpu: "2000m"
+  env:
+    - name: TZ
+      value: "America/Chicago"
+  dataVolumeStorageSize: 10Gi
+  dataVolumeStorageClass: microk8s-hostpath
+
+# Same MetalLB address the old Deployment used
+service:
+  type: LoadBalancer
+  loadBalancerPorts:
+    http: 8088
+    https: 8043
+  extraSpec:
+    loadBalancerIP: 10.20.160.251
+
+# Reached directly through the LoadBalancer, not the nginx ingress
+ingress:
+  enabled: false
