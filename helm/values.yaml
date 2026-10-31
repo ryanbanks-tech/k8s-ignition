@@ -40,6 +40,14 @@ service:
   extraSpec:
     loadBalancerIP: 10.20.160.251
 
+# The node search domain (wolfden.com) has a wildcard record; with the default
+# ndots:5, external names like licensing.inductiveautomation.com resolve to it
+podExtraSpec:
+  dnsConfig:
+    options:
+      - name: ndots
+        value: "1"
+
 # Reached directly through the LoadBalancer, not the nginx ingress
 ingress:
   enabled: false
